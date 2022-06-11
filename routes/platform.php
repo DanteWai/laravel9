@@ -42,6 +42,10 @@ Route::screen('profile', UserProfileScreen::class)
             ->push(__('Profile'), route('platform.profile'));
     });
 
+
+
+Route::screen('email', \App\Orchid\Screens\EmailSenderScreen::class)->name('platform.email');
+
 // Platform > System > Users
 Route::screen('users/{user}/edit', UserEditScreen::class)
     ->name('platform.systems.users.edit')

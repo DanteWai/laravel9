@@ -110,7 +110,10 @@ return [
 
     'resource' => [
         'stylesheets' => [],
-        'scripts'     => [],
+        'scripts'     => [
+            '/js/dashboard.js',
+            '/js/rater.js',
+        ],
     ],
 
     /*
