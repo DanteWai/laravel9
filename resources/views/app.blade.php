@@ -66,17 +66,22 @@
 <body class="d-flex h-100 text-center text-white bg-dark">
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-        <div>
-            <h3 class="float-md-start mb-0">Cover</h3>
-            <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>
-                <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
-            </nav>
-        </div>
-    </header>
+    @php
+        $menu = \App\Models\Menu_items::all();
+    @endphp
+    <x-menu>
+        @foreach($menu as $item)
+            <x-menu.link>{{$item->title}}</x-menu.link>
+        @endforeach
+    </x-menu>
 
+
+    <x-testcomponent count="10" :menu_items="$menu" class="mt-5">
+        <x-slot name="header" class="my-5">
+            im header
+        </x-slot>
+        Hello word
+    </x-testcomponent>
     <main class="px-3">
         <h1>Cover your page.</h1>
         <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>

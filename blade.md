@@ -127,8 +127,17 @@ php artisan make:component forms.input --view - анонимный компон�
 </x-button>
 ```
 
+Регистрация компонента вне стандартных папок
+```php
+// AppServiceProvider.php
+Blade::component(Test::class, 'testcomponent');
+```
+
 Получение параметров
 ```php
+public $type;
+public $message;
+
 public function __construct($type, $message)
 {
     $this->type = $type;
@@ -139,6 +148,7 @@ public function __construct($alertType)
 {
     $this->alertType = $alertType;
 }
+
 <x-alert alert-type="danger" />
 ```
 
@@ -169,7 +179,19 @@ public function render()
 ```
 Скрытие атрибутов / методов
 ```php
-protected $except = ['type'];
+/**
+     * Тип предупреждения.
+     *
+     * @var string
+     */
+    public $type;
+
+    /**
+     * Свойства / методы, которые не должны использоваться в шаблоне компонента.
+     *
+     * @var array
+     */
+    protected $except = ['type'];
 ```
 
 Атрибуты компонента
@@ -190,6 +212,7 @@ protected $except = ['type'];
     {{ $slot }}
 </button>
 
+В этом примере атрибут data-controller всегда будет начинаться с profile-controller
 <div {{ $attributes->merge(['data-controller' => $attributes->prepends('profile-controller')]) }}>
     {{ $slot }}
 </div>
@@ -214,11 +237,6 @@ shouldRender
 view
 withAttributes
 withName
-```
-
-Скрытие атрибутов / методов
-```php
-
 ```
 
 Слоты
